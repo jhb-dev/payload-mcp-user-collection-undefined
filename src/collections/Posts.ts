@@ -7,12 +7,12 @@ const isEditor: Access = ({ req: { user } }) => {
   console.log('--- Access Control Debug ---')
   console.log('user:', user)
   console.log('user?.collection:', user?.collection)
-  console.log('Expected: user.collection === "users"')
-  console.log('Actual: user.collection is undefined')
   console.log('----------------------------')
 
   // This check will always fail because user.collection is undefined
-  return Boolean(user && user.collection === 'users')
+  return Boolean(
+    user && (user.collection === 'users' || user.collection === 'payload-mcp-api-keys'),
+  )
 }
 
 export const Posts: CollectionConfig = {
